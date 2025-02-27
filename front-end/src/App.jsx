@@ -1,16 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { GoogleLogin } from '@react-oauth/google';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <h1>Hey</h1>
-    </>
-  )
+    const responseMessage = (response) => {
+        console.log(response);
+    };
+    const errorMessage = (error) => {
+        console.log(error);
+    };
+    return (
+        <div>
+            <h2>React Google Login</h2>
+            <br />
+            <br />
+            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+        </div>
+    )
 }
-
-export default App
+export default App;
