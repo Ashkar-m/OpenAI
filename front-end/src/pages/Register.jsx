@@ -6,7 +6,7 @@ const Register = () => {
 
     const [formData, setFormData] = useState({ username: "", email: "", password: "" });
     const dispatch = useDispatch();
-    const { loading, error } = useDispatch( (state) => state.auth);
+    const { loading, error } = useSelector( (state) => state.auth);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

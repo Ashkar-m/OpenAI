@@ -1,45 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import axios from "axios";
-
 const BASE_URL = "http://127.0.0.1:8000/";
+
+import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL } from "./authTypes";
 
 const initialState = {
     user: null,
-    token: localStorage.getItem("token") || null,
     loading: false,
     error: null,
 }
 
-const authSlice = createSlice({
-    name: "auth",
-    initialState,
-    reducers: {
-        requestStart: (state) => {
-            state.loading = true;
-            state.error = null;
-        },
-        registerSuccess: (state) => {
-            state.loading = false;
-        },
-        loginSuccess: (state, action) => {
-            state.loading = false;
-            state.user = action.payload.username;
-            state.token = action.payload.token;
-            localStorage.setItem("token", action.payload.token);
-        },
-        requestFailure: (state, action) => {
-            state.loading = false;
-            state.error = action.payload;
-        },
-        logout: (state) => {
-            state.user = null;
-            state.token = null;
-            localStorage.removeItem("token");
-        },
-    },
-});
 
-export const { requestStart, registerSuccess, loginSuccess, requestFailure, logout } = authSlice.actions;
+const authReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case REGISTER_REQUEST:
+            return { ...state, loading: true, error: null };
+        case REGISTER_SUCCESS:
+            return { ...state, loading: false, user: action.payload, error: null };
+        case REGISTER_FAIL:
+            return { ...state, loading: false, error: action.payload };
+        default:
+            return state;
+    }
+};
 
-export default authSlice.reducer;
+export default authReducer;

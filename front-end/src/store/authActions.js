@@ -2,15 +2,21 @@ import axios from "axios";
 
 import { requestStart, registerSuccess, loginSuccess, requestFailure } from "./authSlice";
 
+import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL } from "./authTypes";
+
 const BASE_URL = "http://127.0.0.1:8000/";
 
 export const registerUser = (userData) => async(dispatch) => {
-    dispatch(requestStart());
+    dispatch({ type: REGISTER_REQUEST });
+
     try {
         await axios.post(`${BASE_URL}register/`, userData);
-        dispatch(registerSuccess());
+        dispatch({ type: REGISTER_SUCCESS, payload: response.data });
     } catch (error) {
-        dispatch(requestFailure(error.response?.data || "Registration failed"))
+        dispatch({
+            type: REGISTER_FAIL,
+            payload: error.response?.data?.message || "Registration failed"
+        });
     }
 };
 
