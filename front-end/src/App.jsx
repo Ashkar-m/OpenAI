@@ -1,5 +1,6 @@
 import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
+import Register from './pages/Register';
 
 function App() {
     const responseMessage = (response) => {
@@ -14,6 +15,8 @@ function App() {
             <br />
             <br />
             <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+
+            <Register/>
         </div>
     )
 }

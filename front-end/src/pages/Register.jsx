@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from '../store/authActions';
+import { registerUser, logoutUser } from '../store/authActions';
 
 const Register = () => {
 
@@ -15,7 +15,11 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(registerUser(formData));
-    }
+    };
+
+    const handleLogout = () => {
+        dispatch(logoutUser());
+    };
 
   return (
     <div>
@@ -27,6 +31,8 @@ const Register = () => {
             <button type="submit" disabled={loading}>Register</button>
         </form>
         {error && <p style={{ color: "red"}}>{error}</p>}
+
+        <button onClick={handleLogout}>Logout</button>
       
     </div>
   )

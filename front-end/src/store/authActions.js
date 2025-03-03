@@ -1,6 +1,5 @@
 import axios from "axios";
 
-import { requestStart, registerSuccess, loginSuccess, requestFailure } from "./authSlice";
 
 import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL } from "./authTypes";
 
@@ -31,5 +30,5 @@ export const loginUser = (credentials) => async(dispatch) => {
 };
 
 export const logoutUser = () => (dispatch) => {
-    dispatch(logout());
+    dispatch({ type: "LOGOUT" });
 };

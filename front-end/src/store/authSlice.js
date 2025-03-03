@@ -1,27 +1,28 @@
+
 import { createSlice } from "@reduxjs/toolkit";
 
-const BASE_URL = "http://127.0.0.1:8000/";
+const authSlice = createSlice({
+    name: "auth",
+    initialState: {
+        user: null,
+        loading: false,
+        error: null,
+    },
+    reducers: {
+        registerSuccess: (state, action) => {
+            state.user = action.payload;
+            state.loading = false;
+            state.error = null;
+        },
+        registerFailure: (state, action) => {
+            state.error = action.payload;
+            state.loading = false;
+        },
+        logout: (state) => {
+            state.user = null;
+        },
+    },
+});
 
-import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL } from "./authTypes";
-
-const initialState = {
-    user: null,
-    loading: false,
-    error: null,
-}
-
-
-const authReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case REGISTER_REQUEST:
-            return { ...state, loading: true, error: null };
-        case REGISTER_SUCCESS:
-            return { ...state, loading: false, user: action.payload, error: null };
-        case REGISTER_FAIL:
-            return { ...state, loading: false, error: action.payload };
-        default:
-            return state;
-    }
-};
-
-export default authReducer;
+export const { registerSuccess, registerFailure, logout } = authSlice.actions;
+export default authSlice.reducer;
