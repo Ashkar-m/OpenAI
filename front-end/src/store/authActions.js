@@ -19,13 +19,18 @@ export const registerUser = (userData) => async(dispatch) => {
     }
 };
 
+
 export const loginUser = (credentials) => async(dispatch) => {
-    dispatch(requestStart());
+    dispatch({ type: "LOGIN_REQUEST" });
+
     try {
         const response = await axios.post(`${BASE_URL}login/`, credentials);
-        dispatch(loginSuccess(response.data));
-    } catch(error) {
-        dispatch(requestFailure(error.response?.data || "Login Failed"))
+        dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
+    } catch (error) {
+        dispatch({
+            type: "LOGIN_FAIL",
+            payload: error.response?.data?.message || "Login Failed"
+        });
     }
 };
 
