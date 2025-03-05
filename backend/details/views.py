@@ -35,3 +35,30 @@ class UserView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+# Implimentation of Chat by using Hugging face
+import requests
+from django.conf import settings
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+HUGGINGFACE_API_KEY = "your_huggingface_api_key"
+
+@api_view(["POST"])
+def chat_with_ai(request):
+    user_input = request.data.get("prompt")
+    
+    if not user_input:
+        return Response({"error": "Prompt is required"}, status=400)
+
+    headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
+    payload = {"inputs": user_input}
+
+    response = requests.post(
+        "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill",
+        headers=headers,
+        json=payload
+    )
+
+    result = response.json()
+    return Response({"response": result.get("generated_text", "No response")})
