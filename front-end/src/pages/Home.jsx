@@ -1,5 +1,6 @@
 import React from 'react'
 
+// add correct code for this portion
 const Home = () => {
     const handleChat = async () => {
         if (!prompt.trim()) return;

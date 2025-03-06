@@ -37,6 +37,9 @@ class UserView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 # Implimentation of Chat by using Hugging face
+
+# Need to refine this portion
+
 import requests
 from django.conf import settings
 from rest_framework.response import Response
