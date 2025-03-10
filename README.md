@@ -1,12 +1,15 @@
 # OpenAI Project
 
+
 ## 🚀 Overview
 Welcome to the OpenAI Project! This project leverages OpenAI's advanced models to generate intelligent responses based on user prompts. It features a **React** frontend for a seamless user experience and a **Python Django** backend for efficient processing and API management.
+
 
 ## ✨ Features
 - **AI-Powered Responses** – Get instant, accurate, and human-like responses.
 - **React Frontend** – A fast and optimized UI built with modern web technologies.
 - **Django Backend** – Robust backend for handling API requests and managing AI interactions.
+
 
 ## 🔧 Installation & Setup
 1. Clone the repository:
@@ -38,6 +41,7 @@ Welcome to the OpenAI Project! This project leverages OpenAI's advanced models t
    ```sh
    npm run dev
    ```
+
 
 ## 📌 Usage
 - Enter a prompt in the frontend UI and receive an AI-generated response.
